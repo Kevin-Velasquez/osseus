@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import store from '../../redux/store/index';
+import { addArticle } from "../../redux/actions/index";
 import '../../styles_CSS/Project-Selection/Dropdown.css';
 
 let flip = true;
@@ -21,6 +23,12 @@ class Dropdown extends React.Component {
 
   setFlip() { flip = true; }
 
+  showMe() { 
+    store.dispatch( addArticle({ name: 1, id: 1 }) )
+    store.dispatch( addArticle({ name: 12, id: 2 }) )
+    console.log(store.getState().articles[0]); 
+  }
+
   //The logic of how this dropdown works is that the list is
   //shown and hidden based on the click of the dropdown button.
   //  
@@ -30,7 +38,7 @@ class Dropdown extends React.Component {
 	      <div className="button" onClick={this.showDropdownMenu}> Saved Projects </div>
           { this.state.displayMenu ? (
             <ul>
-    		      <li><Link to="/PluginApp">Project 1</Link></li>
+    		      <li><Link onClick={this.showMe} to="/PluginApp">Project 1</Link></li>
     		      <li><Link to="/PluginApp">Project 2</Link></li>
     		      <li><Link to="/PluginApp">Project 3</Link></li>
             </ul>

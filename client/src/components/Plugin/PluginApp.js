@@ -2,6 +2,7 @@ import React from 'react'
 import PluginPicker from './PluginPicker';
 import DraggablePlugins from './DraggablePlugins';
 import PluginPalette from './PluginPalette';
+import store from '../../redux/store/index';
 
 /*
 * Offsets allows me to differentiate between categories of plugins
@@ -9,13 +10,16 @@ import PluginPalette from './PluginPalette';
 * are their own category, the next 4 their own and so on.
 */ 
 const offsets = [[0],[3],[7],[9],[11],[17]];
-let pluginPickedArray =  new Uint8Array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+//let pluginPickedArray =  new Uint8Array([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+let pluginPickedArray =  new Uint8Array(store.getState().articles[0]);
+let me = store.getState().articles[0]
 
 class PluginApp extends React.Component {
   constructor() {
     super();
     this.handleData = this.handleData.bind(this);
-
+    console.log("here: " + pluginPickedArray + "\nthen: : " + store.getState().articles[0])
+    console.log(me);
     //Defining all important plugin data for looping.
     this.state = {
       clickedIndex: null,
@@ -35,6 +39,7 @@ class PluginApp extends React.Component {
       clickedIndex: index
     });
     pluginPickedArray[index] = !pluginPickedArray[index];
+    console.log(pluginPickedArray)
   }
 
   render() {

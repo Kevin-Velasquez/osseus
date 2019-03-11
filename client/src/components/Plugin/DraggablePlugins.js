@@ -16,7 +16,6 @@ class DraggablePlugins extends React.Component {
       index: null
     };
     this.handleClick = this.handleClick.bind(this);
-    console.log(this.props.image);
   }
 
   /*
